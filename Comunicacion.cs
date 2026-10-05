@@ -1,54 +1,36 @@
-
 using System;
 using System.IO.Ports;
 
-class Program
+
+/// Encapsula el puerto serial hacia la Raspberry Pi Pico W.
+/// Los sensores reales y el LED comparten esta única conexión.
+
+public class PicoConexion : IDisposable
 {
-    static void Main()
+    private readonly SerialPort _puerto;
+
+    public PicoConexion(string nombrePuerto, int baudios = 115200)
     {
-          
-        string nombrePuerto = "COM3";
-
-        using SerialPort puerto = new SerialPort(nombrePuerto, 115200)
+        _puerto = new SerialPort(nombrePuerto, baudios)
         {
-            ReadTimeout = 15000,  // un poco mas que los 10s del READID
-            NewLine = "\n"
+            ReadTimeout = 15000,   // un poco más que los 10 s del READID
+            NewLine = "\n",
+            DtrEnable = true   // algunos sistemas no pasan datos del USB-CDC de la Pico sin DTR
         };
+    }
 
-        puerto.Open();
-        Console.WriteLine($"Conectado a {nombrePuerto}.");
-        Console.WriteLine("Comandos: ISDARK, READID, LEDON, LEDOFF, SALIR");
+    public void Abrir() => _puerto.Open();
 
-        while (true)
-        {
-            Console.Write("> ");
-            string? comando = Console.ReadLine();
+    //Envía un comando de texto y devuelve la línea de respuesta
+    public string Enviar(string comando)
+    {
+        _puerto.WriteLine(comando);
+        return _puerto.ReadLine().Trim();
+    }
 
-            if (string.IsNullOrWhiteSpace(comando))
-            {
-                continue;
-            }
-
-            comando = comando.Trim().ToUpper();
-
-            if (comando == "SALIR")
-            {
-                break;
-            }
-
-            try
-            {
-                puerto.WriteLine(comando);
-                string respuesta = puerto.ReadLine();
-                Console.WriteLine("Respuesta: " + respuesta.Trim());
-            }
-            catch (TimeoutException)
-            {
-                Console.WriteLine("Sin respuesta de la Pico (timeout).");
-            }
-        }
-
-        puerto.Close();
-        Console.WriteLine("Conexion cerrada.");
+    public void Dispose()
+    {
+        if (_puerto.IsOpen) _puerto.Close();
+        _puerto.Dispose();
     }
 }
