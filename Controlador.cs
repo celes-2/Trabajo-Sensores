@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-/// Controlador: registra sensores por composición (lista de ISensor),
-/// coordina sus lecturas y decide la respuesta del actuador (LED).
+// Controlador: registra sensores por composición (lista de ISensor),
+// coordina sus lecturas y decide la respuesta del actuador (LED).
 
 public class ControladorSistema
 {
@@ -15,7 +15,7 @@ public class ControladorSistema
 
     public void RegistrarSensor(ISensor sensor) => _sensores.Add(sensor);
 
-        //Lee todos los sensores registrados excepto los lentos 
+    ///Lee todos los sensores registrados excepto RFID
     public void LeerTodos()
     {
         foreach (ISensor s in _sensores)

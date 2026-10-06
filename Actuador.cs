@@ -1,25 +1,26 @@
-﻿
-// Actuador LED, controlado con los comandos LEDON / LEDOFF enviados a la Pico.
+﻿using System.IO.Ports;
+
+/// Actuador LED, controlado con los comandos LEDON / LEDOFF enviados a la Pico.
 
 public class Led
 {
-    private readonly PicoConexion _pico;
+    private readonly SerialPort _puerto;
 
-    public Led(PicoConexion pico) => _pico = pico;
+    public Led(SerialPort puerto) => _puerto = puerto;
 
     public bool Encendido { get; private set; }
 
     public string Encender()
     {
-        string r = _pico.Enviar("LEDON");
+        _puerto.WriteLine("LEDON");
         Encendido = true;
-        return r;
+        return _puerto.ReadLine().Trim();
     }
 
     public string Apagar()
     {
-        string r = _pico.Enviar("LEDOFF");
+        _puerto.WriteLine("LEDOFF");
         Encendido = false;
-        return r;
+        return _puerto.ReadLine().Trim();
     }
 }
