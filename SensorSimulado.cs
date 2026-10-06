@@ -6,6 +6,7 @@ using System;
 /// con 30 % de probabilidad de "TRUE" (botón presionado) y 70 % de "FALSE".
 /// Implementa ISensor igual que los sensores reales, por lo que el controlador
 /// no puede distinguirlo de ellos.
+/// El sensor simulado está relacionado con el comando ISPRESSED, que se ejecuta en el programa principal y no en la Pico.
 
 public class SensorPulsadorSimulado : ISensor
 {

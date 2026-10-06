@@ -5,7 +5,7 @@ class Program
 {
     static void Main()
     {
-        string nombrePuerto = "COM3";
+        string nombrePuerto = "COM6";
 
         using SerialPort puerto = new SerialPort(nombrePuerto, 115200)
         {
