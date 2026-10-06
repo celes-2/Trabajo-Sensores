@@ -1,0 +1,6 @@
+C:\Users\emari\Documents\Sensores Datos\obj\Debug\net10.0\Sensores Datos.csproj.AssemblyReference.cache
+C:\Users\emari\Documents\Sensores Datos\obj\Debug\net10.0\Sensores Datos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\emari\Documents\Sensores Datos\obj\Debug\net10.0\Sensores Datos.AssemblyInfoInputs.cache
+C:\Users\emari\Documents\Sensores Datos\obj\Debug\net10.0\Sensores Datos.AssemblyInfo.cs
+C:\Users\emari\Documents\Sensores Datos\obj\Debug\net10.0\Sensores Datos.csproj.CoreCompileInputs.cache
+C:\Users\emari\Documents\Sensores Datos\obj\Debug\net10.0\Sensores Datos.sourcelink.json
